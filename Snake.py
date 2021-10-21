@@ -1,13 +1,14 @@
 from tkinter import *
 import random
+from tkinter import font
 
 GAME_WIDTH = 700
 GAME_HEIGHT = 700
-SPEED = 200
+SPEED = 100
 SPACE_SIZE = 50
-BODY_PARTS = 10
+BODY_PARTS = 3
 SNAKE_COLOR = "#00FF00"
-FOOD_COLOR = "#FFC0CB"
+FOOD_COLOR = "#FF0000"
 BACKGROUND_COLOR = "#000000"
 
 class Snake:
@@ -135,7 +136,9 @@ def check_collision(snake):
     # END check for collision with itself
 
 def game_over():
-    print("Game over :(")
+    canvas.delete(ALL)
+    canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/2,
+                        font=("consolas", 70), text="GAME OVER", fill="red", tag="game_over")
 
 
 window = Tk()
