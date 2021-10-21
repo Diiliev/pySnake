@@ -38,6 +38,7 @@ def next_turn(snake, food):
     global direction_changed_flag
     x, y = snake.coordinates[-1]
 
+    # Here we make sure that only one direction change is possible for every turn
     if direction_changed_flag == True: verify_change_direction()
 
     if direction == "up":
@@ -79,6 +80,14 @@ def next_turn(snake, food):
     else:
         window.after(SPEED, next_turn, snake, food)
 
+# This flag is necesary in order to guarentee that only one direction
+# change is possible for every turn. Otherwise, if the snake is moving
+# right for example, and the user changes the direction to up and then
+# to the left faster than the game speed, then the snake will not go up
+# on the next turn, but go left. If the snake was moving right the
+# previus turn and left on the next, that registers as a collision and
+# it is game over. By using the flag system, only the last user command
+# is saved as a new direction and it is verified on the next turn. 
 def change_direction(user_input):
     global direction_changed_flag
     direction_changed_flag = True
